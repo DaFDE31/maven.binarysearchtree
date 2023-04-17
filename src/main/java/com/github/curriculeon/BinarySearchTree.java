@@ -13,11 +13,39 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     }
 
     private Value get(BinarySearchTreeNode<Key, Value> x, Key key) {
-        return null; // TODO
+        BinarySearchTreeNode<Key, Value> compare = root;
+        while (compare != null){
+            if (compare.getKey().compareTo(x.getKey()) > 0){
+                compare = compare.getRight();
+            }
+            else if (compare.getKey().compareTo(x.getKey()) < 0){
+                compare = compare.getLeft();
+            }
+            if (compare.getKey().equals(key)){
+                return compare.getValue();
+            }
+        }
+
+        return null;
     }
 
     private BinarySearchTreeNode<Key, Value> put(BinarySearchTreeNode<Key, Value> x, Key key, Value value) {
-        return null; // TODO
+        size++;
+        if (root == null){
+            root = x;
+        }
+        else{
+            BinarySearchTreeNode<Key, Value> compare = root;
+            while (compare != null){
+                if (compare.getKey().compareTo(x.getKey()) > 0){
+                    compare.setRight(x);
+                }
+                else if (compare.getKey().compareTo(x.getKey()) < 0){
+                    compare.setRight(x);
+                }
+            }
+        }
+        return root;
     }
 
     private BinarySearchTreeNode<Key, Value> min(BinarySearchTreeNode<Key, Value> x) {
