@@ -15,15 +15,16 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     private Value get(BinarySearchTreeNode<Key, Value> x, Key key) {
         BinarySearchTreeNode<Key, Value> compare = root;
         while (compare != null){
+            if (compare.getKey().equals(key)){
+                return compare.getValue();
+            }
             if (compare.getKey().compareTo(key) > 0){// IF the orginal is bigger
                 compare = compare.getLeft();
             }
             else if (compare.getKey().compareTo(key) < 0){// IF the orginal is smaller
                 compare = compare.getRight();
             }
-            if (compare.getKey().equals(key)){
-                return compare.getValue();
-            }
+
         }
 
         return null;
