@@ -6,13 +6,13 @@ import org.junit.Test;
 
 public class GetRootTest {
     @Test
-    void testGetRootOnEmptyTree() {
+    public void testGetRootOnEmptyTree() {
         BinarySearchTree<Integer, String> bst = new BinarySearchTree<>();
         Assert.assertNull(bst.getRoot());
     }
 
     @Test
-    void testGetRootOnSingleElementTree() {
+    public void testGetRootOnSingleElementTree() {
         BinarySearchTree<Integer, String> bst = new BinarySearchTree<>();
         bst.put(5, "Five");
         Assert.assertEquals(bst.getRoot().getKey().intValue(), 5);
@@ -20,7 +20,7 @@ public class GetRootTest {
     }
 
     @Test
-    void testGetRootOnMultiElementTree() {
+    public void testGetRootOnMultiElementTree() {
         BinarySearchTree<Integer, String> bst = new BinarySearchTree<>();
         bst.put(5, "Five");
         bst.put(3, "Three");
@@ -31,7 +31,7 @@ public class GetRootTest {
     }
 
     @Test
-    void testGetRootAfterDelete() {
+    public void testGetRootAfterDelete() {
         BinarySearchTree<Integer, String> bst = new BinarySearchTree<>();
         bst.put(5, "Five");
         bst.put(3, "Three");

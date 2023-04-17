@@ -3,6 +3,8 @@ package com.github.curriculeon;
 public class BinarySearchTreeNode<Key extends Comparable<Key>, Value> {
     private BinarySearchTreeNode<Key, Value> Left;
     private BinarySearchTreeNode<Key, Value> Right;
+    private BinarySearchTreeNode<Key, Value> Previous;
+
     private Key key;
     private Value value;
 
@@ -30,19 +32,34 @@ public class BinarySearchTreeNode<Key extends Comparable<Key>, Value> {
     }
 
     public BinarySearchTreeNode<Key, Value> getLeft() {
-        return Left; // TODO
-    }
+        return Left;}
 
     public void setLeft(BinarySearchTreeNode<Key, Value> left) {
         Left = left;
+        if (left != null)
+        left.setPrevious(this);
     }
 
     public BinarySearchTreeNode<Key, Value> getRight() {
-        return Right; // TODO
+        return Right;
     }
 
     public void setRight(BinarySearchTreeNode<Key, Value> right) {
         Right = right;
+        if (right != null)
+        right.setPrevious(this);
+    }
+
+    public BinarySearchTreeNode<Key, Value> Previous() {
+        return Previous;
+    }
+
+    public void setPrevious(BinarySearchTreeNode<Key, Value> previous) {
+        Previous = previous;
+    }
+
+    public boolean hasPrevious(){
+        return Previous != null;
     }
 
     @Override

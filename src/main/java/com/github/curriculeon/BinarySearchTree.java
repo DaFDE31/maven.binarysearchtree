@@ -28,7 +28,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         }
 
         return null;
-    } // Might work but have to do put first
+    }
 
     private BinarySearchTreeNode<Key, Value> put(BinarySearchTreeNode<Key, Value> x, Key key, Value value) {
         size++;
@@ -64,27 +64,80 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         return x;
     }
 
+    ////////// TRY TO IMPLEMENT RUNNABLE
     private BinarySearchTreeNode<Key, Value> min(BinarySearchTreeNode<Key, Value> x) {
-        return null; // TODO
+        BinarySearchTreeNode<Key, Value> compare = root;
+        while (compare.getLeft() != null){
+            compare = compare.getLeft();
+        }
+        return compare;
     }
 
     private BinarySearchTreeNode<Key, Value> max(BinarySearchTreeNode<Key, Value> x) {
-        return null; // TODO
+        BinarySearchTreeNode<Key, Value> compare = root;
+        while (compare.getRight() != null){
+            compare = compare.getRight();
+        }
+        return compare;
     }
 
     private BinarySearchTreeNode<Key, Value> deleteMin(BinarySearchTreeNode<Key, Value> x) {
-        size--;
-        return null; // TODO
+        BinarySearchTreeNode<Key, Value> compare = root;
+        while (compare.getLeft() != null){
+            compare = compare.getLeft();
+        }
+        if (compare.getRight() == null){
+            if (compare.hasPrevious()){
+                compare = compare.Previous();
+                compare.setLeft(null);
+            }
+            else
+            compare = null;
+        }
+        else
+            compare = compare.getRight();
+
+        return compare;
     }
 
     private BinarySearchTreeNode<Key, Value> deleteMax(BinarySearchTreeNode<Key, Value> x) {
+        BinarySearchTreeNode<Key, Value> compare = root;
         size--;
-        return null; // TODO
+        while (compare.getRight() != null){
+            compare = compare.getRight();
+        }
+        if (compare.getLeft() == null){
+            if (compare.hasPrevious()){
+                compare = compare.Previous();
+                compare.setRight(null);
+            }
+            else
+                compare = null;
+        }
+        else
+            compare = compare.getLeft();
+
+        return compare;
     }
 
     private BinarySearchTreeNode<Key, Value> delete(BinarySearchTreeNode<Key, Value> x, Key key) {
         size--;
-        return null; // TODO
+        BinarySearchTreeNode<Key, Value> compare = root;
+        while (compare != null){
+            if (compare.getKey().equals(key)){
+
+                return compare;
+            }
+            if (compare.getKey().compareTo(key) > 0){// IF the orginal is bigger
+                compare = compare.getLeft();
+            }
+            else if (compare.getKey().compareTo(key) < 0){// IF the orginal is smaller
+                compare = compare.getRight();
+            }
+
+        }
+
+        return null;
     }
 
     public int size() {
