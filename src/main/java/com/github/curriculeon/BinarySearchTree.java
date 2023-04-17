@@ -125,7 +125,13 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         BinarySearchTreeNode<Key, Value> compare = root;
         while (compare != null){
             if (compare.getKey().equals(key)){
-
+                if (compare.getRight() != null){
+                    compare.getRight().setLeft(compare.getLeft());
+                    compare = compare.getRight();
+                }
+                else if (compare.getLeft() != null){
+                    compare = compare.getLeft();
+                }
                 return compare;
             }
             if (compare.getKey().compareTo(key) > 0){// IF the orginal is bigger
