@@ -8,17 +8,22 @@ public class BinarySearchTreePrinter<Key extends Comparable<Key>, Value> {
     }
 
     private String printInOrder(BinarySearchTreeNode<Key, Value> node, StringBuilder sb) {
-        //while (bst.getRoot() )
-        while (node != null){
-            if (node.getLeft() != null){
+        int limit = 0;
+        while (limit < bst.size()){
+            if (node.getLeft() != null && ShouldAdd(node.getLeft(), sb)){//IF THERE IS A NEW VALUE TO THE LEFT
                 node = node.getLeft();
             }
-            else if (node.getRight() != null){
-                node = node.getRight();
-            }
             else{
-                sb.append(node.getKey());
-                bst.delete(node.getKey());
+                if (ShouldAdd(node, sb)) {// IF THE KEY IS NOT IN THE STRING
+                    sb.append(node.getKey()).append("\n");
+                    limit++;
+                }
+                if (node.getRight() != null && ShouldAdd(node.getRight(), sb)){//IF THERE IS A NEW VALUE TO THE RIGHT
+                    node = node.getRight();
+                }
+                else{
+                    node = node.Previous();
+                }
             }
         }
         return sb.toString();
@@ -50,7 +55,24 @@ public class BinarySearchTreePrinter<Key extends Comparable<Key>, Value> {
     }
 
     private String printPostOrder(BinarySearchTreeNode<Key, Value> node, StringBuilder sb) {
-        return null; // TODO
+        int limit = 0;
+        while (limit < bst.size()){
+
+            if (node.getLeft() != null && ShouldAdd(node.getLeft(), sb)){//IF THERE IS A NEW VALUE TO THE LEFT
+                node = node.getLeft();
+            }
+            else if (node.getRight() != null && ShouldAdd(node.getRight(), sb)){//IF THERE IS A NEW VALUE TO THE RIGHT
+                node = node.getRight();
+            }
+            else{
+                if (ShouldAdd(node, sb)) {// IF THE KEY IS NOT IN THE STRING
+                    sb.append(node.getKey()).append("\n");
+                    limit++;
+                }
+                node = node.Previous();
+            }
+        }
+        return sb.toString();
     }
 
     public String printInOrder() {
