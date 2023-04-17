@@ -15,11 +15,11 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     private Value get(BinarySearchTreeNode<Key, Value> x, Key key) {
         BinarySearchTreeNode<Key, Value> compare = root;
         while (compare != null){
-            if (compare.getKey().compareTo(x.getKey()) > 0){
-                compare = compare.getRight();
-            }
-            else if (compare.getKey().compareTo(x.getKey()) < 0){
+            if (compare.getKey().compareTo(key) > 0){// IF the orginal is bigger
                 compare = compare.getLeft();
+            }
+            else if (compare.getKey().compareTo(key) < 0){// IF the orginal is smaller
+                compare = compare.getRight();
             }
             if (compare.getKey().equals(key)){
                 return compare.getValue();
@@ -27,25 +27,40 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         }
 
         return null;
-    }
+    } // Might work but have to do put first
 
     private BinarySearchTreeNode<Key, Value> put(BinarySearchTreeNode<Key, Value> x, Key key, Value value) {
         size++;
+        if (key == null || value == null){
+            throw new NullPointerException();
+        }
         if (root == null){
-            root = x;
+            x = new BinarySearchTreeNode<>(key, value);
         }
         else{
             BinarySearchTreeNode<Key, Value> compare = root;
             while (compare != null){
-                if (compare.getKey().compareTo(x.getKey()) > 0){
-                    compare.setRight(x);
+                if (compare.getKey().compareTo(key) < 0){
+                    if (compare.getRight() == null){
+                        compare.setRight(new BinarySearchTreeNode<>(key, value));
+                        break;
+                    }
+                    compare = compare.getRight();
                 }
-                else if (compare.getKey().compareTo(x.getKey()) < 0){
-                    compare.setRight(x);
+                else if (compare.getKey().compareTo(key) > 0){
+                    if (compare.getLeft() == null){
+                        compare.setLeft(new BinarySearchTreeNode<>(key, value));
+                        break;
+                    }
+                    compare = compare.getLeft();
+                }
+                else{
+                    compare.setValue(value);
+                    break;
                 }
             }
         }
-        return root;
+        return x;
     }
 
     private BinarySearchTreeNode<Key, Value> min(BinarySearchTreeNode<Key, Value> x) {
@@ -57,14 +72,17 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     }
 
     private BinarySearchTreeNode<Key, Value> deleteMin(BinarySearchTreeNode<Key, Value> x) {
+        size--;
         return null; // TODO
     }
 
     private BinarySearchTreeNode<Key, Value> deleteMax(BinarySearchTreeNode<Key, Value> x) {
+        size--;
         return null; // TODO
     }
 
     private BinarySearchTreeNode<Key, Value> delete(BinarySearchTreeNode<Key, Value> x, Key key) {
+        size--;
         return null; // TODO
     }
 
