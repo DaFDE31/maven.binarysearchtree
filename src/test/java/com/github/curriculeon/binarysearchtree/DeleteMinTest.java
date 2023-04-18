@@ -39,9 +39,7 @@ public class DeleteMinTest {
         BinarySearchTree<Integer, String> bst = new BinarySearchTree<>();
         bst.put(2, "two");
         bst.put(1, "one");
-        System.out.println(bst.size());
         bst.deleteMin();
-        System.out.println(bst.size());
         Assert.assertEquals(1, bst.size());
         Assert.assertNull(bst.get(1));
         Assert.assertNotNull(bst.get(2));

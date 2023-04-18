@@ -8,6 +8,17 @@ public class BinarySearchTreePrinter<Key extends Comparable<Key>, Value> {
     }
 
     private String printInOrder(BinarySearchTreeNode<Key, Value> node, StringBuilder sb) {
+        if (node != null){
+            printInOrder(node.getLeft(), sb);
+            sb.append(node.getKey() + "\n");
+            printInOrder(node.getRight(), sb);
+        }
+        return sb.toString();
+    }
+
+
+
+    private String printInOrder2(BinarySearchTreeNode<Key, Value> node, StringBuilder sb) {
         int limit = 0;
         while (limit < bst.size()){
             if (node.getLeft() != null && ShouldAdd(node.getLeft(), sb)){//IF THERE IS A NEW VALUE TO THE LEFT
@@ -74,6 +85,8 @@ public class BinarySearchTreePrinter<Key extends Comparable<Key>, Value> {
         }
         return sb.toString();
     }
+
+
 
     public String printInOrder() {
         return printInOrder(bst.getRoot(), new StringBuilder());

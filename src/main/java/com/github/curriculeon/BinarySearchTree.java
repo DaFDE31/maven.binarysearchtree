@@ -30,6 +30,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         return null;
     }
 
+
     private BinarySearchTreeNode<Key, Value> put(BinarySearchTreeNode<Key, Value> x, Key key, Value value) {
         size++;
         if (key == null || value == null){
@@ -39,24 +40,23 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
             x = new BinarySearchTreeNode<>(key, value);
         }
         else{
-            BinarySearchTreeNode<Key, Value> compare = root;
-            while (compare != null){
-                if (compare.getKey().compareTo(key) < 0){
-                    if (compare.getRight() == null){
-                        compare.setRight(new BinarySearchTreeNode<>(key, value));
+            while (root != null){
+                if (root.getKey().compareTo(key) < 0){
+                    if (root.getRight() == null){
+                        root.setRight(new BinarySearchTreeNode<>(key, value));
                         break;
                     }
-                    compare = compare.getRight();
+                    root = root.getRight();
                 }
-                else if (compare.getKey().compareTo(key) > 0){
-                    if (compare.getLeft() == null){
-                        compare.setLeft(new BinarySearchTreeNode<>(key, value));
+                else if (root.getKey().compareTo(key) > 0){
+                    if (root.getLeft() == null){
+                        root.setLeft(new BinarySearchTreeNode<>(key, value));
                         break;
                     }
-                    compare = compare.getLeft();
+                    root = root.getLeft();
                 }
                 else{
-                    compare.setValue(value);
+                    root.setValue(value);
                     break;
                 }
             }
@@ -64,81 +64,77 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         return x;
     }
 
-    ////////// TRY TO IMPLEMENT RUNNABLE
+
+
     private BinarySearchTreeNode<Key, Value> min(BinarySearchTreeNode<Key, Value> x) {
-        BinarySearchTreeNode<Key, Value> compare = root;
-        while (compare.getLeft() != null){
-            compare = compare.getLeft();
+        while (root.getLeft() != null){
+            root = root.getLeft();
         }
-        return compare;
+        return root;
     }
 
     private BinarySearchTreeNode<Key, Value> max(BinarySearchTreeNode<Key, Value> x) {
-        BinarySearchTreeNode<Key, Value> compare = root;
-        while (compare.getRight() != null){
-            compare = compare.getRight();
+        while (root.getRight() != null){
+            root = root.getRight();
         }
-        return compare;
+        return root;
     }
 
     private BinarySearchTreeNode<Key, Value> deleteMin(BinarySearchTreeNode<Key, Value> x) {
-        BinarySearchTreeNode<Key, Value> compare = root;
-        while (compare.getLeft() != null){
-            compare = compare.getLeft();
+        while (root.getLeft() != null){
+            root = root.getLeft();
         }
-        if (compare.getRight() == null){
-            if (compare.hasPrevious()){
-                compare = compare.Previous();
-                compare.setLeft(null);
+        if (root.getRight() == null){
+            if (root.hasPrevious()){
+                root = root.Previous();
+                root.setLeft(null);
             }
             else
-            compare = null;
+                root = null;
         }
         else
-            compare = compare.getRight();
+            root = root.getRight();
 
-        return compare;
+        return root;
     }
 
     private BinarySearchTreeNode<Key, Value> deleteMax(BinarySearchTreeNode<Key, Value> x) {
-        BinarySearchTreeNode<Key, Value> compare = root;
         size--;
-        while (compare.getRight() != null){
-            compare = compare.getRight();
+        while (root.getRight() != null){
+            root = root.getRight();
         }
-        if (compare.getLeft() == null){
-            if (compare.hasPrevious()){
-                compare = compare.Previous();
-                compare.setRight(null);
+        if (root.getLeft() == null){
+            if (root.hasPrevious()){
+                root = root.Previous();
+                root.setRight(null);
             }
             else
-                compare = null;
+                root = null;
         }
         else
-            compare = compare.getLeft();
+            root = root.getLeft();
 
-        return compare;
+        return root;
     }
 
     private BinarySearchTreeNode<Key, Value> delete(BinarySearchTreeNode<Key, Value> x, Key key) {
         size--;
-        BinarySearchTreeNode<Key, Value> compare = root;
-        while (compare != null){
-            if (compare.getKey().equals(key)){
-                if (compare.getRight() != null){
-                    compare.getRight().setLeft(compare.getLeft());
-                    compare = compare.getRight();
+        while (root != null){
+            if (root.getKey().equals(key)){
+                if (root.getRight() != null){
+                    root.getRight().setLeft(root.getLeft());
+                    root = root.getRight();
                 }
-                else if (compare.getLeft() != null){
-                    compare = compare.getLeft();
+                else if (root.getLeft() != null){
+                    root = root.getLeft();
                 }
-                return compare;
+                return root;
             }
-            if (compare.getKey().compareTo(key) > 0){// IF the orginal is bigger
-                compare = compare.getLeft();
+            if (root.getKey().compareTo(key) > 0){// IF the orginal is bigger
+                root = root.getLeft();
             }
-            else if (compare.getKey().compareTo(key) < 0){// IF the orginal is smaller
-                compare = compare.getRight();
+            else if (root.getKey().compareTo(key) < 0){// IF the orginal is smaller
+                root = root.getRight();
             }
 
         }
