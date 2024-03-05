@@ -6,6 +6,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
 
     private BinarySearchTreeNode<Key, Value> root;
     private int size;
+    // Hello friends
 
     public BinarySearchTree() {
         root = null;
